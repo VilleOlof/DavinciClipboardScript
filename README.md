@@ -19,3 +19,8 @@ Don't forget that you *need* a "/" at the end of the path to indicate inside the
 
 You can also change the image prefix if you want but that's not needed.  
 Now you can go back into Davinci Resolve and try it out!  
+
+---
+<p align="center">
+  <img src="https://github.com/VilleOlof/DavinciClipboardScript/blob/main/Example.gif" alt="animated" />
+</p>
