@@ -84,10 +84,12 @@ function AddProjectDirectory()
 end
 
 function SaveImageFromClipboard()
-    path = ProjectPath..ClipboardImagePrefix..GetFileCount(ProjectPath)..".png"
-    cmd_command = "Powershell -WindowStyle Hidden $img = get-clipboard -format image; Powershell $img.save(\'"..path.."\'); exit"
 
-    io.popen(cmd_command);
+    path = ProjectPath..ClipboardImagePrefix..GetFileCount(ProjectPath)..".png"
+
+    local cmd_command = [[powershell.exe -WindowStyle Hidden -Command "& {Add-Type -Assembly PresentationCore; $img = [Windows.Clipboard]::GetImage(); $fcb = new-object Windows.Media.Imaging.FormatConvertedBitmap($img, [Windows.Media.PixelFormats]::Rgba64, $null, 0); $file = ']]..path..[['; $stream = [IO.File]::Open($file, 'OpenOrCreate'); $encoder = New-Object Windows.Media.Imaging.PngBitmapEncoder; $encoder.Frames.Add([Windows.Media.Imaging.BitmapFrame]::Create($fcb)); $encoder.Save($stream); $stream.Dispose();}"]]
+
+    io.popen(cmd_command)
 end
 
 function Wait(second, millisecond)
@@ -95,12 +97,12 @@ function Wait(second, millisecond)
     while os.time() < ostime_vrbl do end
 end
 
-function ImageTimeout()
+function FileTimeout(file_path)
     local count = 0
     local limit = 10
 
     ::Attempt::
-    local file = io.open(path)
+    local file = io.open(file_path)
     if (file == nil) then
         if (count == limit) then return false end
         count = count+1
@@ -125,7 +127,7 @@ ClipboardFolder = GetClipboardBin(subfolders)
 
 mediapool:SetCurrentFolder(ClipboardFolder)
 
-success = ImageTimeout();
+success = FileTimeout(path);
 
 if (success) then
     mediaStorage:AddItemListToMediaPool(path)
