@@ -10,11 +10,12 @@ Download the `ImageClipboard.lua` file in releases or clone repo.
 Place the file in `C:\Users\<user>\AppData\Roaming\Blackmagic Design\DaVinci Resolve\Support\Fusion\Scripts\Edit\`  
 The script is accessed through `Workspace>Scripts>ImageClipboard` in Davinci Resolve.  
 
-But before we can run the script, we need probably want to change one line inside the `.lua` file.  
+But before we can run the script, we need probably want to change one line inside the `ImageClipboard.lua` file.  
 Open it up with something like VSCode, Notepad or anything that can edit it.  
+
 And change the Directory Path on `line 4 (ClipboardImagePath)` to be where you want the images to be saved at.  
 Don't forget that you *need* a "/" at the end of the path to indicate inside the directory.  
+*(Also don't forget that it needs to be a "/" and not "\\", this is for the entire path)*
 
 You can also change the image prefix if you want but that's not needed.  
 Now you can go back into Davinci Resolve and try it out!  
-
