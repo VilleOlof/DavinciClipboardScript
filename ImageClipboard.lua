@@ -1,7 +1,7 @@
 
 --The Path Where Project Folders And The Saved Images Will Appear At In The File Explorer
 --Don't Forget The '/' At The End Of The Path
-ClipboardImagePath = "C:/Users/Ville/Desktop/New folder (6)/"
+ClipboardImagePath = "C:/Program Files/Blackmagic Design/"
 
 --Prefix For The Image Names (C0,C1,C2...)
 ClipboardImagePrefix = "C"
