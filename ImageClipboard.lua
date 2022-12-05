@@ -48,7 +48,7 @@ function GetClipboardBin(subFolder)
     end
 end
 
-function GetFileCount(path)
+function GetFileCount(path,extra_number)
     local count = 0
 
     --just removing the last / from the 'selectedPath' to make the command
@@ -59,13 +59,14 @@ function GetFileCount(path)
     for file in io.popen(Dir_CMD):lines() do 
 
         local fixed_cap = file:sub(1,#ClipboardImagePrefix)
+        
 
         if (fixed_cap == ClipboardImagePrefix) then
             count = count + 1
         end
     end
 
-    return count
+    return count+extra_number
 end
 
 function DirExists(dir)
@@ -85,7 +86,14 @@ end
 
 function SaveImageFromClipboard()
 
-    path = ProjectPath..ClipboardImagePrefix..GetFileCount(ProjectPath)..".png"
+    path = ProjectPath..ClipboardImagePrefix..GetFileCount(ProjectPath,0)..".png"
+    local attempts = 0
+    ::save_attempt::
+    if (DirExists(path)) then 
+        attempts = attempts + 1
+        path = ProjectPath..ClipboardImagePrefix..GetFileCount(ProjectPath,attempts)..".png"
+        goto save_attempt
+    end
 
     local cmd_command = [[powershell.exe -WindowStyle Hidden -Command "& {Add-Type -Assembly PresentationCore; $img = [Windows.Clipboard]::GetImage(); $fcb = new-object Windows.Media.Imaging.FormatConvertedBitmap($img, [Windows.Media.PixelFormats]::Rgba64, $null, 0); $file = ']]..path..[['; $stream = [IO.File]::Open($file, 'OpenOrCreate'); $encoder = New-Object Windows.Media.Imaging.PngBitmapEncoder; $encoder.Frames.Add([Windows.Media.Imaging.BitmapFrame]::Create($fcb)); $encoder.Save($stream); $stream.Dispose();}"]]
 
