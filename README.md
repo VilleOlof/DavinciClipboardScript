@@ -3,6 +3,8 @@ Script takes the current image saved to your clipboard
 and if it does not exists, creates a new "Clipboard" bin in the mediapool  
 then it adds the newly saved image into that bin, Ready to be dragged into the timeline
 
+*Only Works On Windows*
+
 ## Installation
 Stupidly easy to install.  
 Download the `ImageClipboard.lua` file in releases or clone repo.  
