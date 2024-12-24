@@ -1,4 +1,12 @@
 # Davinci Resolve: Image Clipboard Script
+
+> [!CAUTION]
+> This repository is archived due to it not working in DaVinci Resolve 19.1+ and above  
+> And intead theres a new repository over [here](https://github.com/VilleOlof/resolve_clipboard) *(Does require Studio)*  
+> That does infact work in newer versions and simpler to use.  
+
+---
+
 Script takes the current image saved to your clipboard  
 and if it does not exists, creates a new "Clipboard" bin in the mediapool  
 then it adds the newly saved image into that bin, Ready to be dragged into the timeline
